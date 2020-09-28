@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "869201041438",
+    "firebase_url": "https://smartmeter-itb.firebaseio.com",
+    "project_id": "smartmeter-itb",
+    "storage_bucket": "smartmeter-itb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:869201041438:android:631da0d097b6dd6439360f",
+        "android_client_info": {
+          "package_name": "com.teknik_elektro_itb.smart_meter_itb"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "869201041438-liarjit24f808imuunjb8f6fb6ncglsm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC2u5w4giSO2EIT25zsPNJRxzvNVdc6nis"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "869201041438-liarjit24f808imuunjb8f6fb6ncglsm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
