@@ -16,3 +16,6 @@ web dashboard with request relay to electricity meter server.
 ## Usage
 1. `npm start` on project directory to run web app locally
 2. `npm run buil` on project directory to build project for deployment
+
+## Final Product Sample
+Web dashboard can be accessed here : https://github.com/alijarasyidi/smart-meter/blob/master/repo-image/diagram-dashboard-app.jpg
