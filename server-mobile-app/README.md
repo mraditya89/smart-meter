@@ -1,6 +1,6 @@
 # server-mobile-app
 
-![Data Flow Diagram] (https://github.com/alijarasyidi/smart-meter/blob/master/repo-image/diagram-mobile-server.jpg)
+![Data Flow Diagram](https://github.com/alijarasyidi/smart-meter/blob/master/repo-image/diagram-mobile-server.jpg)
 
 ## Description
 This server is in charge of controlling and processing data from and to mobile app interface. There are two main functions of this server : first for query and process data 
