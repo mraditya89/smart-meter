@@ -12,7 +12,7 @@ use Node.js framework and Express.js to create API.
 
 ## Setup
 1. Clone / download repository project
-2. `npm install` on directory project to install depedencies
+2. `npm install` on project directory to install depedencies
 
 ## Usage
 1. `node index.js` or `nodemon index.js` on project directory
