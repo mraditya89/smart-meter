@@ -9,9 +9,9 @@ This repository contain implemented payment gateway system and interface system.
 
 ## In This Project
 - Customer Interface :
-  - **server-mobile-app**
-  - **mobile-app**
-- **server-payment-gateway**
+  - **server-mobile-app** (Express.js)
+  - **mobile-app** (Unity)
+- **server-payment-gateway** (Express.js)
 - Operator Interface :
-  - **server-web-dashboard**
-  - **web-dashboard**
+  - **server-web-dashboard** (Express.js)
+  - **web-dashboard** (React.js)
