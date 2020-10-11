@@ -8,10 +8,10 @@ At the time of this project, there was no integration of electrical data communi
 This repository contain implemented payment gateway system and interface system. The payment gateway service used is Midtrans. The customer interface is implemented with a mobile application, while the operator interface is with a web dashboard. The results of the payment gateway feature implementation and data access through the interface went well as expected.
 
 ## In This Project
-- Customer Interface
+- Customer Interface :
   - **server-mobile-app**
   - **mobile-app**
 - **server-payment-gateway**
-- Operator Interface
+- Operator Interface :
   - **server-web-dashboard**
   - **web-dashboard**
