@@ -19,3 +19,4 @@ This repository contain implemented payment gateway system and interface system.
 ## Final Product Sample
 - App can be found and install on PlayStore for Android devices here : https://play.google.com/store/apps/details?id=com.teknik_elektro_itb.smart_meter_itb
 - Web dashboard can be accessed here : https://dashboard-ta.netlify.app/
+- Demo product : https://www.youtube.com/watch?v=Zotn7p1M31s&feature=youtu.be
