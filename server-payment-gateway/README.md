@@ -9,7 +9,7 @@ on this project. This server created using Node.js framework and Express.js to c
 ## Requirement
 1. Node.js installed
 
-## Usage
+## Setup
 1. Clone / download repository project
 2. `npm install` on project directory to install depedencies
 
