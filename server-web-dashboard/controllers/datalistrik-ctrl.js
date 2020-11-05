@@ -6,7 +6,7 @@ getDataListrikAkhir = async (req, res) => {
       return res.status(400).json({ success: false, error: err });
     }
 
-    if (!data) {
+    if (data.length === 0) {
       return res
         .status(404)
         .json({ success: false, error: `Data listrik not found` });
@@ -32,7 +32,7 @@ getDataListrikTotal = async (req, res) => {
     if (err) {
       return res.status(400).json({ success: false, error: err });
     }
-    if (!data.length) {
+    if (data.length === 0) {
       return res
         .status(404)
         .json({ success: false, error: `Data listrik not found` });
@@ -78,11 +78,11 @@ getCurrentYearDataListrikById = async (req, res) => {
       if (err) {
         return res.status(400).json({ success: false, error: err });
       }
-      // if (!data.length) {
-      //     return res
-      //         .status(404)
-      //         .json({ success: false, error: `Data listrik not found` })
-      // }
+      if (data.length === 0) {
+        return res
+          .status(404)
+          .json({ success: false, error: `Data listrik not found` });
+      }
 
       let dataFilter = [];
       let timeFilter = data[0].date_time.getTime() - 250000;
