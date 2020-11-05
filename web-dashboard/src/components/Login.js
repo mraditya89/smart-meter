@@ -1,33 +1,34 @@
-import React, { useState } from 'react';
-import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
-import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
-import { Link } from 'react-router-dom'
-import axios from 'axios';
+import React, { useState } from "react";
+import Avatar from "@material-ui/core/Avatar";
+import Button from "@material-ui/core/Button";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import TextField from "@material-ui/core/TextField";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Checkbox from "@material-ui/core/Checkbox";
+import Grid from "@material-ui/core/Grid";
+import Box from "@material-ui/core/Box";
+import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+import Typography from "@material-ui/core/Typography";
+import { makeStyles } from "@material-ui/core/styles";
+import Container from "@material-ui/core/Container";
+import { Link } from "react-router-dom";
+import axios from "axios";
 import { useHistory } from "react-router-dom";
-import { CircularProgress } from '@material-ui/core';
+import { CircularProgress } from "@material-ui/core";
 
 // const apiUrl = 'http://localhost:3000'
-const apiUrl = 'https://api-meteran-dashboard.herokuapp.com'
+// const apiUrl = 'https://api-meteran-dashboard.herokuapp.com'
+const apiUrl = process.env.REACT_APP_WEB_SERVER;
 
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
+      {"Copyright © "}
       <Link color="inherit" /*href="https://material-ui.com/"*/>
         Dashboard Meteran
-        </Link>{' '}
+      </Link>{" "}
       {new Date().getFullYear()}
-      {'.'}
+      {"."}
     </Typography>
   );
 }
@@ -35,16 +36,16 @@ function Copyright() {
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
   },
   avatar: {
     margin: theme.spacing(1),
     backgroundColor: theme.palette.secondary.main,
   },
   form: {
-    width: '100%', // Fix IE 11 issue.
+    width: "100%", // Fix IE 11 issue.
     marginTop: theme.spacing(1),
   },
   submit: {
@@ -55,29 +56,32 @@ const useStyles = makeStyles((theme) => ({
 export default function Login() {
   const classes = useStyles();
   const history = useHistory();
-  const storedJwt = localStorage.getItem('token');
+  const storedJwt = localStorage.getItem("token");
   const [jwt, setJwt] = useState(storedJwt || null);
-  const [user, setUser] = useState('');
-  const [password, setPassword] = useState('');
+  const [user, setUser] = useState("");
+  const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
   const loginFunction = async () => {
     setLoading(true);
-    await axios.get(`${apiUrl}/get-operator/${user}/${password}`).then(res => {
-      localStorage.removeItem('token')
-      localStorage.setItem('token', res.data.token);
-      setJwt(res.token);
-      history.push('/dashboard')
-      setLoading(false);
-    }).catch((e) => {
-      console.log(e)
-      alert("Wrong user or password");
-      setLoading(false);
-    })
+    await axios
+      .get(`${apiUrl}/get-operator/${user}/${password}`)
+      .then((res) => {
+        localStorage.removeItem("token");
+        localStorage.setItem("token", res.data.token);
+        setJwt(res.token);
+        history.push("/dashboard");
+        setLoading(false);
+      })
+      .catch((e) => {
+        console.log(e);
+        alert("Wrong user or password");
+        setLoading(false);
+      });
   };
 
   function CircularLoading() {
-    if(loading) {
+    if (loading) {
       return <CircularProgress />;
     } else {
       return null;
@@ -106,7 +110,7 @@ export default function Login() {
             autoComplete="user"
             autoFocus
             onChange={(text) => {
-              setUser(text.target.value)
+              setUser(text.target.value);
             }}
           />
           <TextField
@@ -120,7 +124,7 @@ export default function Login() {
             id="password"
             autoComplete="current-password"
             onChange={(text) => {
-              setPassword(text.target.value)
+              setPassword(text.target.value);
             }}
           />
           {/* <FormControlLabel
@@ -134,8 +138,8 @@ export default function Login() {
             color="primary"
             className={classes.submit}
             onClick={(event) => {
-              event.preventDefault()
-              loginFunction()
+              event.preventDefault();
+              loginFunction();
             }}
           >
             Sign In

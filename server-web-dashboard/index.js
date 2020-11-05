@@ -1,20 +1,19 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const router = require("./routes/router");
 const morgan = require("morgan");
 const dotenv = require("dotenv");
 dotenv.config();
+const db = require("./db");
 const jwt = require("express-jwt");
 const jsonwebtoken = require("jsonwebtoken");
-const jwtSecret = "secret123";
-
-const db = require("./db");
 
 const app = express();
 const apiPort = process.env.PORT || 3000;
 const apiIpAddress = process.env.IP_ADDRESS || "127.0.0.1";
-
-const MidtransCtrl = require("./payment/midtrans");
+const jwtSecret = "secret123";
+const OperatorCtrl = require("./controllers/operator-ctrl");
 
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -38,11 +37,11 @@ app.get("/jwt", (req, res) => {
   });
 });
 
-app.get("/pay-test", MidtransCtrl.paymentTokenTest);
-app.post("/pay", MidtransCtrl.paymentToken);
-app.post("/notification", MidtransCtrl.paymentNotification);
+app.get("/get-operator/:user/:password", OperatorCtrl.getOperator);
 
-// app.use(jwt({ secret: jwtSecret, algorithms: ['HS256'] }))
+app.use(jwt({ secret: jwtSecret, algorithms: ["HS256"] }));
+
+app.use("/api", router);
 
 app.listen(apiPort, apiIpAddress, () =>
   console.log(`Server running ${apiIpAddress}:${apiPort}`)

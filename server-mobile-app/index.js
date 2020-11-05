@@ -1,18 +1,23 @@
-const express = require('express')
-const bodyParser = require('body-parser')
-const cors = require('cors')
-const jwt = require('express-jwt')
-const jsonwebtoken = require('jsonwebtoken')
+const express = require("express");
+const bodyParser = require("body-parser");
+const cors = require("cors");
+const morgan = require("morgan");
+const dotenv = require("dotenv");
+dotenv.config();
 
-const db = require('./db')
-const router = require('./routes/router')
+const jwt = require("express-jwt");
+const jsonwebtoken = require("jsonwebtoken");
 
-const app = express()
-const apiPort = process.env.PORT || 3000
-const jwtSecret = 'secret123'
-const UnitCtrl = require('./controllers/unit-ctrl')
-const NotificationCtrl = require('./controllers/notification-ctrl')
-const UnitRegisCtrl = require('./controllers/unit-registration-ctrl')
+const db = require("./db");
+const router = require("./routes/router");
+
+const app = express();
+const apiPort = process.env.PORT || 3000;
+const apiIpAddress = process.env.IP_ADDRESS || "127.0.0.1";
+const jwtSecret = "secret123";
+const UnitCtrl = require("./controllers/unit-ctrl");
+const NotificationCtrl = require("./controllers/notification-ctrl");
+const UnitRegisCtrl = require("./controllers/unit-registration-ctrl");
 
 // Check bcrypt
 // const bcrypt = require('bcryptjs');
@@ -37,38 +42,40 @@ const UnitRegisCtrl = require('./controllers/unit-registration-ctrl')
 //   });
 // })
 
-app.use(bodyParser.urlencoded({ extended: true }))
-app.use(cors())
-app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cors());
+app.use(bodyParser.json());
 
 // Firebase Init
 var admin = require("firebase-admin");
 var serviceAccount = require("./smartmeter-itb-firebase-adminsdk-s254y-0e9dd6b538.json");
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
-  databaseURL: "https://smartmeter-itb.firebaseio.com"
+  databaseURL: process.env.FIREBASE_URI,
 });
 
 // Firebase Notification
-app.get('/notif-push', NotificationCtrl.postNotification);
+app.get("/notif-push", NotificationCtrl.postNotification);
 
-db.on('error', console.error.bind(console, 'MongoDB connection error:'))
+db.on("error", console.error.bind(console, "MongoDB connection error:"));
 
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
+app.get("/", (req, res) => {
+  res.send("Hello World!");
+});
 
-app.get('/jwt', (req, res) => {
+app.get("/jwt", (req, res) => {
   res.json({
-    token: jsonwebtoken.sign({ user: 'test' }, jwtSecret)
-  })
-})
+    token: jsonwebtoken.sign({ user: "test" }, jwtSecret),
+  });
+});
 
-app.get('/login/:id/:pin', UnitCtrl.loginUser);
-app.post('/unit/register', UnitRegisCtrl.postRegistration);
+app.get("/login/:id/:pin", UnitCtrl.loginUser);
+app.post("/unit/register", UnitRegisCtrl.postRegistration);
 
-app.use(jwt({ secret: jwtSecret, algorithms: ['HS256'] }))
+app.use(jwt({ secret: jwtSecret, algorithms: ["HS256"] }));
 
-app.use('/api', router)
+app.use("/api", router);
 
-app.listen(apiPort, () => console.log(`Server running on port ${apiPort}`))
+app.listen(apiPort, apiIpAddress, () =>
+  console.log(`Server running ${apiIpAddress}:${apiPort}`)
+);
