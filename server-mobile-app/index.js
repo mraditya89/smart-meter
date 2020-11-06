@@ -46,6 +46,12 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 app.use(bodyParser.json());
 
+if (app.get("env") === "production") {
+  app.use(morgan("combined"));
+} else {
+  app.use(morgan("dev"));
+}
+
 // Firebase Init
 var admin = require("firebase-admin");
 var serviceAccount = require("./smartmeter-itb-firebase-adminsdk-s254y-0e9dd6b538.json");
