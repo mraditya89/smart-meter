@@ -223,10 +223,33 @@ getLastYearDataListrik = async (req, res) => {
     .catch((err) => console.log(err));
 };
 
+postDataListrik = async (req, res) => {
+  try {
+    const fields = ["unit_id", "daya_sisa", "daya_pemakaian"];
+
+    fields.forEach((field) => {
+      if (req.body[field] === undefined)
+        return res.status(400).send({ error: `${field} required` });
+    });
+
+    req.body["date_time"] = Date.now();
+    const dataListrik = new DataListrik(req.body);
+
+    await dataListrik.save();
+
+    return res.status(200).send({
+      message: "ok",
+    });
+  } catch (error) {
+    return res.status(500).send({ error });
+  }
+};
+
 module.exports = {
   getDataListrikAkhir,
   getDataListrikTotal,
   getCurrentYearDataListrik,
   getLastYearDataListrik,
   getCurrentYearDataListrikById,
+  postDataListrik,
 };
