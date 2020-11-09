@@ -1,5 +1,6 @@
 const Unit = require("../models/unit-model");
 const UnitRegis = require("../models/unit-registration-model");
+const DataListrik = require("../models/datalistrik-model");
 
 createUnit = async (req, res) => {
   const body = req.body;
@@ -11,7 +12,7 @@ createUnit = async (req, res) => {
       error: "You must provide a user",
     });
   }
-  console.log(1);
+  // console.log(1);
   await UnitRegis.findOne({ reg_id: body.reg_id }, (err, data) => {
     if (err) {
       return res.status(400).json({ success: false, error: err });
@@ -52,9 +53,17 @@ createUnit = async (req, res) => {
   newUnit
     .save()
     .then(() => {
-      return res.status(201).json({
-        success: true,
-        message: "Unit created!",
+      data_listrik_test = new DataListrik({
+        unit_id: unit_id,
+        daya_sisa: 0,
+        daya_pemakaian: 0,
+        date_time: Date.now(),
+      });
+      data_listrik_test.save().then(() => {
+        return res.status(201).json({
+          success: true,
+          message: "Unit created!",
+        });
       });
     })
     .catch((error) => {

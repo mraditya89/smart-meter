@@ -91,7 +91,7 @@ getUnits = async (req, res) => {
     if (err) {
       return res.status(400).json({ success: false, error: err });
     }
-    console.log(user);
+    // console.log(user);
     if (!user.length) {
       return res.status(404).json({ success: false, error: `Users not found` });
     }

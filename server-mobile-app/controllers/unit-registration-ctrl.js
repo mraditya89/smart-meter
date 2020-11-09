@@ -17,7 +17,7 @@ postRegistration = async (req, res) => {
     kota: body.kota,
     provinsi: body.provinsi,
   };
-
+  // console.log(bd);
   const unit = new UnitRegis(bd);
   unit
     .save()
