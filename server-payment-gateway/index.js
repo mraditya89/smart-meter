@@ -43,6 +43,6 @@ app.post("/pay", MidtransCtrl.paymentToken);
 app.post("/notification", MidtransCtrl.paymentNotification);
 
 // app.use(jwt({ secret: jwtSecret, algorithms: ['HS256'] }))
-app.listen(PORT, () =>
+app.listen(apiPort, () =>
   console.log(`Server running ${apiIpAddress}:${apiPort}`)
 );
