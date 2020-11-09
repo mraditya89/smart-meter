@@ -3,7 +3,7 @@ const UnitRegis = require("../models/unit-registration-model");
 
 createUnit = async (req, res) => {
   const body = req.body;
-  console.log(body);
+  // console.log(body);
 
   if (!body) {
     return res.status(400).json({
@@ -11,7 +11,7 @@ createUnit = async (req, res) => {
       error: "You must provide a user",
     });
   }
-  // console.log(1);
+  console.log(1);
   await UnitRegis.findOne({ reg_id: body.reg_id }, (err, data) => {
     if (err) {
       return res.status(400).json({ success: false, error: err });
