@@ -1,63 +1,53 @@
-import React, { Component } from 'react';
-import clsx from 'clsx';
-import { makeStyles } from '@material-ui/core/styles';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Drawer from '@material-ui/core/Drawer';
-import Box from '@material-ui/core/Box';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import List from '@material-ui/core/List';
-import Typography from '@material-ui/core/Typography';
-import Divider from '@material-ui/core/Divider';
-import IconButton from '@material-ui/core/IconButton';
-import Badge from '@material-ui/core/Badge';
-import Container from '@material-ui/core/Container';
-import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
-import Link from '@material-ui/core/Link';
-import MenuIcon from '@material-ui/icons/Menu';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import NotificationsIcon from '@material-ui/icons/Notifications';
-import { mainListItems, secondaryListItems } from './listItems';
-import Iframe from 'react-iframe';
-import api from '../api';
-import Chart2 from './dashboard page/Chart2';
-import Chart3 from './dashboard page/Chart3';
-import CountPanel from './dashboard page/CountPanel';
+import React, { Component } from "react";
+import clsx from "clsx";
+import { makeStyles } from "@material-ui/core/styles";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import Drawer from "@material-ui/core/Drawer";
+import Box from "@material-ui/core/Box";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import List from "@material-ui/core/List";
+import Typography from "@material-ui/core/Typography";
+import Divider from "@material-ui/core/Divider";
+import IconButton from "@material-ui/core/IconButton";
+import Badge from "@material-ui/core/Badge";
+import Container from "@material-ui/core/Container";
+import Grid from "@material-ui/core/Grid";
+import Paper from "@material-ui/core/Paper";
+import Link from "@material-ui/core/Link";
+import MenuIcon from "@material-ui/icons/Menu";
+import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
+import NotificationsIcon from "@material-ui/icons/Notifications";
+import { mainListItems, secondaryListItems } from "./listItems";
+import EmojiObjectsIcon from "@material-ui/icons/EmojiObjects";
+import Iframe from "react-iframe";
+import api from "../api";
+import Chart2 from "./dashboard page/Chart2";
+import Chart3 from "./dashboard page/Chart3";
+import CountPanel from "./dashboard page/CountPanel";
 import { useHistory, Redirect } from "react-router-dom";
-
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" /*href="https://material-ui.com/"*/>
-        Dashboard Meteran
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
+import { Icon } from "@material-ui/core";
+import Copyright from "./Copyright/Copyright";
 
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    display: 'flex',
+    display: "flex",
   },
   toolbar: {
     paddingRight: 24, // keep right padding when drawer closed
   },
   toolbarIcon: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'flex-end',
-    padding: '0 8px',
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "flex-end",
+    padding: "0 8px",
     ...theme.mixins.toolbar,
   },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
-    transition: theme.transitions.create(['width', 'margin'], {
+    transition: theme.transitions.create(["width", "margin"], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
@@ -65,7 +55,7 @@ const useStyles = makeStyles((theme) => ({
   appBarShift: {
     marginLeft: drawerWidth,
     width: `calc(100% - ${drawerWidth}px)`,
-    transition: theme.transitions.create(['width', 'margin'], {
+    transition: theme.transitions.create(["width", "margin"], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
     }),
@@ -74,36 +64,36 @@ const useStyles = makeStyles((theme) => ({
     marginRight: 36,
   },
   menuButtonHidden: {
-    display: 'none',
+    display: "none",
   },
   title: {
     flexGrow: 1,
   },
   drawerPaper: {
-    position: 'relative',
-    whiteSpace: 'nowrap',
+    position: "relative",
+    whiteSpace: "nowrap",
     width: drawerWidth,
-    transition: theme.transitions.create('width', {
+    transition: theme.transitions.create("width", {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
     }),
   },
   drawerPaperClose: {
-    overflowX: 'hidden',
-    transition: theme.transitions.create('width', {
+    overflowX: "hidden",
+    transition: theme.transitions.create("width", {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
     width: theme.spacing(7),
-    [theme.breakpoints.up('sm')]: {
+    [theme.breakpoints.up("sm")]: {
       width: theme.spacing(9),
     },
   },
   appBarSpacer: theme.mixins.toolbar,
   content: {
     flexGrow: 1,
-    height: '100vh',
-    overflow: 'auto',
+    height: "100vh",
+    overflow: "auto",
   },
   container: {
     paddingTop: theme.spacing(4),
@@ -111,12 +101,12 @@ const useStyles = makeStyles((theme) => ({
   },
   paper: {
     padding: theme.spacing(2),
-    display: 'flex',
-    overflow: 'auto',
-    flexDirection: 'column',
+    display: "flex",
+    overflow: "auto",
+    flexDirection: "column",
   },
   fixedHeight: {
-    height: 240,
+    height: 160,
   },
   fixedHeight2: {
     height: 400,
@@ -141,18 +131,30 @@ function DashboardFunction(param) {
   return (
     <div className={classes.root}>
       <CssBaseline />
-      <AppBar position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>
+      <AppBar
+        position="absolute"
+        className={clsx(classes.appBar, open && classes.appBarShift)}
+      >
         <Toolbar className={classes.toolbar}>
           <IconButton
             edge="start"
             color="inherit"
             aria-label="open drawer"
             onClick={handleDrawerOpen}
-            className={clsx(classes.menuButton, open && classes.menuButtonHidden)}
+            className={clsx(
+              classes.menuButton,
+              open && classes.menuButtonHidden
+            )}
           >
             <MenuIcon />
           </IconButton>
-          <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
+          <Typography
+            component="h1"
+            variant="h6"
+            color="inherit"
+            noWrap
+            className={classes.title}
+          >
             Dashboard Operator
           </Typography>
           {/* <IconButton color="inherit">
@@ -182,35 +184,41 @@ function DashboardFunction(param) {
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className={classes.container}>
-          <Grid container spacing={3} alignItems={'center'}>
-
-            <Grid item xs={12} md={3} lg={3}>
+          <Grid container spacing={3} alignItems={"center"}>
+            <Grid item xs={12} sm={6} md={6} lg={3}>
               <Paper className={fixedHeightPaper}>
-                <CountPanel title='Jumlah Unit Total' jumlah={param.jumlah.total} />
+                {/* <EmojiObjectsIcon
+                  color={"primary"}
+                  style={{ fontSize: 40, position: "absolute", right: "0px" }}
+                /> */}
+                <CountPanel title="Unit Total" jumlah={param.jumlah.total} />
               </Paper>
             </Grid>
 
-            <Grid item xs={12} md={3} lg={3}>
+            <Grid item xs={12} sm={6} md={6} lg={3}>
               <Paper className={fixedHeightPaper}>
-                <CountPanel title='Jumlah Unit Menyala' jumlah={param.jumlah.on} />
+                <CountPanel title="Unit Menyala" jumlah={param.jumlah.on} />
               </Paper>
             </Grid>
 
-            <Grid item xs={12} md={3} lg={3}>
+            <Grid item xs={12} sm={6} md={6} lg={3}>
               <Paper className={fixedHeightPaper}>
-                <CountPanel title='Jumlah Unit Mati' jumlah={param.jumlah.off} />
+                <CountPanel title="Unit Mati" jumlah={param.jumlah.off} />
               </Paper>
             </Grid>
 
-            <Grid item xs={12} md={3} lg={3}>
+            <Grid item xs={12} sm={6} md={6} lg={3}>
               <Paper className={fixedHeightPaper}>
-                <CountPanel title='Jumlah Unit Tempered' jumlah={param.jumlah.tempered} />
+                <CountPanel
+                  title="Unit Tempered"
+                  jumlah={param.jumlah.tempered}
+                />
               </Paper>
             </Grid>
 
             <Grid item xs={12} md={12} lg={12}>
               <Paper className={fixedHeightPaper2}>
-                <Chart2 datas={param.datas} year={dt.getFullYear()}/>
+                <Chart2 datas={param.datas} year={dt.getFullYear()} />
               </Paper>
             </Grid>
 
@@ -219,7 +227,6 @@ function DashboardFunction(param) {
                 <Chart3 location={param.unit_location} />
               </Paper>
             </Grid>
-
 
             {/* Chart */}
             {/* <Grid item xs={12} md={8} lg={9}>
@@ -258,13 +265,11 @@ function DashboardFunction(param) {
                 </div>
               </Paper>
             </Grid> */}
-
           </Grid>
 
           <Box pt={4}>
             <Copyright />
           </Box>
-
         </Container>
       </main>
     </div>
@@ -273,53 +278,60 @@ function DashboardFunction(param) {
 
 export default class Dashboard extends Component {
   constructor(props) {
-    super(props)
+    super(props);
 
     this.state = {
-      jumlah: '',
+      jumlah: "",
       data_all: [],
       unit_location: [],
       redirect: false,
-      path: '',
-    }
+      path: "",
+    };
   }
 
   componentDidMount = async () => {
-    await api.getJumlahUnitBagian().then(res => {
-      this.setState({
-        jumlah: res.data.data
+    await api
+      .getJumlahUnitBagian()
+      .then((res) => {
+        this.setState({
+          jumlah: res.data.data,
+        });
       })
-    }).catch((e) => {
-      console.log(e);
-      alert("Session timeout, please re login")
-      localStorage.removeItem('token')
-      this.handleRedirect('/')
-    })
-    await api.getCurrentYear().then(res => {
+      .catch((e) => {
+        console.log(e);
+        alert("Session timeout, please re login");
+        localStorage.removeItem("token");
+        this.handleRedirect("/");
+      });
+    await api.getCurrentYear().then((res) => {
       this.setState({
-        data_all: res.data.data
-      })
-    })
-    await api.getUnitLocation().then(res => {
+        data_all: res.data.data,
+      });
+    });
+    await api.getUnitLocation().then((res) => {
       this.setState({
-        unit_location: res.data.data
-      })
-    })
-  }
+        unit_location: res.data.data,
+      });
+    });
+  };
 
   handleRedirect = (link) => {
-      this.setState({
-          redirect: true,
-          path: link,
-      });
-  }
+    this.setState({
+      redirect: true,
+      path: link,
+    });
+  };
 
   render() {
     if (this.state.redirect) {
-        return <Redirect push to={this.state.path} />;
+      return <Redirect push to={this.state.path} />;
     }
     return (
-      <DashboardFunction jumlah={this.state.jumlah} datas={this.state.data_all} unit_location={this.state.unit_location} />
-    )
+      <DashboardFunction
+        jumlah={this.state.jumlah}
+        datas={this.state.data_all}
+        unit_location={this.state.unit_location}
+      />
+    );
   }
 }

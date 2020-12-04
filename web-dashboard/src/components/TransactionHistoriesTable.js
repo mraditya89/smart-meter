@@ -1,21 +1,21 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableHead from '@material-ui/core/TableHead';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableFooter from '@material-ui/core/TableFooter';
-import TablePagination from '@material-ui/core/TablePagination';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
-import IconButton from '@material-ui/core/IconButton';
-import FirstPageIcon from '@material-ui/icons/FirstPage';
-import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
-import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
-import LastPageIcon from '@material-ui/icons/LastPage';
-import Title from './Title';
+import React from "react";
+import PropTypes from "prop-types";
+import { makeStyles, useTheme } from "@material-ui/core/styles";
+import Table from "@material-ui/core/Table";
+import TableHead from "@material-ui/core/TableHead";
+import TableBody from "@material-ui/core/TableBody";
+import TableCell from "@material-ui/core/TableCell";
+import TableContainer from "@material-ui/core/TableContainer";
+import TableFooter from "@material-ui/core/TableFooter";
+import TablePagination from "@material-ui/core/TablePagination";
+import TableRow from "@material-ui/core/TableRow";
+import Paper from "@material-ui/core/Paper";
+import IconButton from "@material-ui/core/IconButton";
+import FirstPageIcon from "@material-ui/icons/FirstPage";
+import KeyboardArrowLeft from "@material-ui/icons/KeyboardArrowLeft";
+import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight";
+import LastPageIcon from "@material-ui/icons/LastPage";
+import Title from "./Title";
 
 const useStyles1 = makeStyles((theme) => ({
   root: {
@@ -52,120 +52,165 @@ function TablePaginationActions(props) {
         disabled={page === 0}
         aria-label="first page"
       >
-        {theme.direction === 'rtl' ? <LastPageIcon /> : <FirstPageIcon />}
+        {theme.direction === "rtl" ? <LastPageIcon /> : <FirstPageIcon />}
       </IconButton>
-      <IconButton onClick={handleBackButtonClick} disabled={page === 0} aria-label="previous page">
-        {theme.direction === 'rtl' ? <KeyboardArrowRight /> : <KeyboardArrowLeft />}
+      <IconButton
+        onClick={handleBackButtonClick}
+        disabled={page === 0}
+        aria-label="previous page"
+      >
+        {theme.direction === "rtl" ? (
+          <KeyboardArrowRight />
+        ) : (
+          <KeyboardArrowLeft />
+        )}
       </IconButton>
       <IconButton
         onClick={handleNextButtonClick}
         disabled={page >= Math.ceil(count / rowsPerPage) - 1}
         aria-label="next page"
       >
-        {theme.direction === 'rtl' ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
+        {theme.direction === "rtl" ? (
+          <KeyboardArrowLeft />
+        ) : (
+          <KeyboardArrowRight />
+        )}
       </IconButton>
       <IconButton
         onClick={handleLastPageButtonClick}
         disabled={page >= Math.ceil(count / rowsPerPage) - 1}
         aria-label="last page"
       >
-        {theme.direction === 'rtl' ? <FirstPageIcon /> : <LastPageIcon />}
+        {theme.direction === "rtl" ? <FirstPageIcon /> : <LastPageIcon />}
       </IconButton>
     </div>
   );
 }
 
 TablePaginationActions.propTypes = {
-    count: PropTypes.number.isRequired,
-    onChangePage: PropTypes.func.isRequired,
-    page: PropTypes.number.isRequired,
-    rowsPerPage: PropTypes.number.isRequired,
+  count: PropTypes.number.isRequired,
+  onChangePage: PropTypes.func.isRequired,
+  page: PropTypes.number.isRequired,
+  rowsPerPage: PropTypes.number.isRequired,
 };
 
 const useStyles2 = makeStyles({
-    table: {
-        minWidth: 500,
-    },
+  table: {
+    minWidth: 500,
+  },
 });
 
 export default function TransactionHistoriesTable(param) {
-    const classes = useStyles2();
-    const [page, setPage] = React.useState(0);
-    const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const classes = useStyles2();
+  const [page, setPage] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
-    const emptyRows = rowsPerPage - Math.min(rowsPerPage, param.data.length - page * rowsPerPage);
+  const emptyRows =
+    rowsPerPage - Math.min(rowsPerPage, param.data.length - page * rowsPerPage);
 
-    const handleChangePage = (event, newPage) => {
-        setPage(newPage);
-    };
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
 
-    const handleChangeRowsPerPage = (event) => {
-        setRowsPerPage(parseInt(event.target.value, 10));
-        setPage(0);
-    };
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
+  };
 
-    if(param.data.length > 0) {
-      param.data.sort((a, b) => (a.date_time > b.date_time ? -1 : 1));
-    }
+  if (param.data.length > 0) {
+    param.data.sort((a, b) => (a.date_time > b.date_time ? -1 : 1));
+  }
 
-    return (
-    <TableContainer component={Paper}>
-        <Title>Histori Transaksi Payment Gateway</Title>
-        <Table className={classes.table} aria-label="custom pagination table">
+  return (
+    <TableContainer component={Paper} style={{ paddingTop: "20px" }}>
+      <Title>Histori Transaksi Payment Gateway</Title>
+      <Table
+        className={classes.table}
+        aria-label="custom pagination table"
+        style={{ marginTop: "15px" }}
+      >
         <TableHead>
-            <TableRow>
-                <TableCell align="center" style={{fontWeight: 'bold'}}>Order Id</TableCell>
-                <TableCell align="center" style={{fontWeight: 'bold'}}>Jumlah Uang</TableCell>
-                <TableCell align="center" style={{fontWeight: 'bold'}}>Tipe Pembayaran</TableCell>
-                <TableCell align="center" style={{fontWeight: 'bold'}}>Pembayaran Selesai</TableCell>
-            </TableRow>
+          <TableRow style={{ backgroundColor: "#1565c0" }}>
+            <TableCell
+              align="center"
+              style={{ fontWeight: "bold", padding: "13px", color: "#e1f5fe" }}
+            >
+              Order Id
+            </TableCell>
+            <TableCell
+              align="center"
+              style={{ fontWeight: "bold", padding: "13px", color: "#e1f5fe" }}
+            >
+              Jumlah Uang
+            </TableCell>
+            <TableCell
+              align="center"
+              style={{ fontWeight: "bold", padding: "13px", color: "#e1f5fe" }}
+            >
+              Tipe Pembayaran
+            </TableCell>
+            <TableCell
+              align="center"
+              style={{ fontWeight: "bold", padding: "13px", color: "#e1f5fe" }}
+            >
+              Pembayaran Selesai
+            </TableCell>
+          </TableRow>
         </TableHead>
         <TableBody>
-            {(rowsPerPage > 0
-            ? param.data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+          {(rowsPerPage > 0
+            ? param.data.slice(
+                page * rowsPerPage,
+                page * rowsPerPage + rowsPerPage
+              )
             : param.data
-            ).map((row) => (
-            <TableRow key={row.name}>
-                <TableCell align="center" style={{ width: 160 }}>
-                    {row.order_id}
-                </TableCell>
-                <TableCell align="center" style={{ width: 160 }}>
-                    {row.gross_amount}
-                </TableCell>
-                <TableCell align="center" style={{ width: 160 }}>
-                    {row.payment_type}
-                </TableCell>
-                <TableCell align="center" style={{ width: 160 }}>
-                    {row.settlement_time}
-                </TableCell>
+          ).map((row, rowIndex) => (
+            <TableRow
+              key={row.name}
+              style={{
+                backgroundColor: rowIndex % 2 !== 0 ? "#e3f2fd" : "",
+              }}
+            >
+              <TableCell align="center" style={{ width: 160, padding: "13px" }}>
+                {`${row.order_id.slice(0, 15)} ...`}
+              </TableCell>
+              <TableCell align="center" style={{ width: 160, padding: "13px" }}>
+                {`Rp ${parseInt(row.gross_amount).toLocaleString()}`}
+              </TableCell>
+              <TableCell align="center" style={{ width: 160, padding: "13px" }}>
+                {row.payment_type}
+              </TableCell>
+              <TableCell align="center" style={{ width: 160, padding: "13px" }}>
+                {new Date(row.settlement_time).toLocaleString()}
+              </TableCell>
             </TableRow>
-            ))}
+          ))}
 
-            {emptyRows > 0 && (
+          {emptyRows > 0 && (
             <TableRow style={{ height: 53 * emptyRows }}>
-                <TableCell colSpan={6} />
+              <TableCell colSpan={6} />
             </TableRow>
-            )}
+          )}
         </TableBody>
         <TableFooter>
-            <TableRow>
+          <TableRow>
             <TablePagination
-                rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
-                colSpan={3}
-                count={param.data.length}
-                rowsPerPage={rowsPerPage}
-                page={page}
-                SelectProps={{
-                inputProps: { 'aria-label': 'rows per page' },
+              rowsPerPageOptions={[5, 10, 25, { label: "All", value: -1 }]}
+              colSpan={3}
+              count={param.data.length}
+              rowsPerPage={rowsPerPage}
+              page={page}
+              SelectProps={{
+                inputProps: { "aria-label": "rows per page" },
                 native: true,
-                }}
-                onChangePage={handleChangePage}
-                onChangeRowsPerPage={handleChangeRowsPerPage}
-                ActionsComponent={TablePaginationActions}
+              }}
+              onChangePage={handleChangePage}
+              onChangeRowsPerPage={handleChangeRowsPerPage}
+              ActionsComponent={TablePaginationActions}
             />
-            </TableRow>
+          </TableRow>
         </TableFooter>
-        </Table>
+      </Table>
     </TableContainer>
-    );
+  );
 }
