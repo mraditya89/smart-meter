@@ -26,6 +26,8 @@ import Chart3 from "./dashboard page/Chart3";
 import CountPanel from "./dashboard page/CountPanel";
 import { useHistory, Redirect } from "react-router-dom";
 import Copyright from "./Copyright/Copyright";
+import AssignmentIcon from "@material-ui/icons/Assignment";
+import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 
 const drawerWidth = 240;
 
@@ -146,20 +148,24 @@ function LastYearPageFunction(param) {
           >
             <MenuIcon />
           </IconButton>
-          <Typography
-            component="h1"
-            variant="h6"
-            color="inherit"
-            noWrap
-            className={classes.title}
-          >
-            Arsip {dt.getFullYear() - 1}
-          </Typography>
-          <IconButton color="inherit">
+          <div style={{ display: "flex", alignItems: "center" }}>
+            <AssignmentIcon style={{ marginRight: "0.2em" }} />
+            <Typography
+              component="h1"
+              variant="h6"
+              color="inherit"
+              noWrap
+              className={classes.title}
+            >
+              Arsip {dt.getFullYear() - 1}
+            </Typography>
+          </div>
+
+          {/* <IconButton color="inherit">
             <Badge badgeContent={0} color="secondary">
               <NotificationsIcon />
             </Badge>
-          </IconButton>
+          </IconButton> */}
         </Toolbar>
       </AppBar>
       <Drawer

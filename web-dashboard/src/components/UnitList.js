@@ -24,6 +24,7 @@ import Deposits from "./Deposits";
 import Orders from "./Orders";
 import UnitTable from "./UnitTable";
 import Copyright from "./Copyright/Copyright";
+import PeopleIcon from "@material-ui/icons/People";
 
 const drawerWidth = 240;
 
@@ -137,15 +138,18 @@ export default function UnitList() {
           >
             <MenuIcon />
           </IconButton>
-          <Typography
-            component="h1"
-            variant="h6"
-            color="inherit"
-            noWrap
-            className={classes.title}
-          >
-            List Unit
-          </Typography>
+          <div style={{ display: "flex", alignItems: "center" }}>
+            <PeopleIcon style={{ marginRight: "0.2em" }} />
+            <Typography
+              component="h1"
+              variant="h6"
+              color="inherit"
+              noWrap
+              className={classes.title}
+            >
+              List Unit
+            </Typography>
+          </div>
           {/* <IconButton color="inherit">
             <Badge badgeContent={0} color="secondary">
               <NotificationsIcon />

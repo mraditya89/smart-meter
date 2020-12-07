@@ -28,6 +28,7 @@ import CountPanel from "./dashboard page/CountPanel";
 import { useHistory, Redirect } from "react-router-dom";
 import { Icon } from "@material-ui/core";
 import Copyright from "./Copyright/Copyright";
+import DashboardIcon from "@material-ui/icons/Dashboard";
 
 const drawerWidth = 240;
 
@@ -148,20 +149,19 @@ function DashboardFunction(param) {
           >
             <MenuIcon />
           </IconButton>
-          <Typography
-            component="h1"
-            variant="h6"
-            color="inherit"
-            noWrap
-            className={classes.title}
-          >
-            Dashboard Operator
-          </Typography>
-          {/* <IconButton color="inherit">
-            <Badge badgeContent={0} color="secondary">
-              <NotificationsIcon />
-            </Badge>
-          </IconButton> */}
+
+          <div style={{ display: "flex", alignItems: "center" }}>
+            <DashboardIcon style={{ marginRight: "0.2em" }} />
+            <Typography
+              component="h1"
+              variant="h6"
+              color="inherit"
+              noWrap
+              className={classes.title}
+            >
+              Dashboard Operator
+            </Typography>
+          </div>
         </Toolbar>
       </AppBar>
       <Drawer
@@ -176,6 +176,7 @@ function DashboardFunction(param) {
             <ChevronLeftIcon />
           </IconButton>
         </div>
+
         <Divider />
         <List>{mainListItems}</List>
         <Divider />

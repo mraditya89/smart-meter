@@ -23,6 +23,7 @@ import TransactionHistoriesTable from "./TransactionHistoriesTable";
 import api from "../api";
 import { useHistory, Redirect } from "react-router-dom";
 import Copyright from "./Copyright/Copyright";
+import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 
 const drawerWidth = 240;
 
@@ -136,15 +137,19 @@ function TransaksiPageFunction(param) {
           >
             <MenuIcon />
           </IconButton>
-          <Typography
-            component="h1"
-            variant="h6"
-            color="inherit"
-            noWrap
-            className={classes.title}
-          >
-            Transaksi
-          </Typography>
+
+          <div style={{ display: "flex", alignItems: "center" }}>
+            <ShoppingCartIcon style={{ marginRight: "0.2em" }} />
+            <Typography
+              component="h1"
+              variant="h6"
+              color="inherit"
+              noWrap
+              className={classes.title}
+            >
+              Transaksi
+            </Typography>
+          </div>
           {/* <IconButton color="inherit">
                         <Badge badgeContent={0} color="secondary">
                             <NotificationsIcon />

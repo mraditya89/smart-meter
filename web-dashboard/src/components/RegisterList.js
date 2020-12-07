@@ -21,6 +21,7 @@ import NotificationsIcon from "@material-ui/icons/Notifications";
 import { mainListItems, secondaryListItems } from "./listItems";
 import RegisterTable from "./RegisterTable";
 import Copyright from "./Copyright/Copyright";
+import PersonAddIcon from "@material-ui/icons/PersonAdd";
 
 const drawerWidth = 240;
 
@@ -134,15 +135,20 @@ export default function RegisterList() {
           >
             <MenuIcon />
           </IconButton>
-          <Typography
-            component="h1"
-            variant="h6"
-            color="inherit"
-            noWrap
-            className={classes.title}
-          >
-            Register Unit Baru
-          </Typography>
+
+          <div style={{ display: "flex", alignItems: "center" }}>
+            <PersonAddIcon style={{ marginRight: "0.2em" }} />
+            <Typography
+              component="h1"
+              variant="h6"
+              color="inherit"
+              noWrap
+              className={classes.title}
+            >
+              Register Unit Baru
+            </Typography>
+          </div>
+
           {/* <IconButton color="inherit">
             <Badge badgeContent={0} color="secondary">
               <NotificationsIcon />

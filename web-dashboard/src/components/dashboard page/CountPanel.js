@@ -30,7 +30,7 @@ export default function ControlPanel(param) {
         {param.jumlah}
       </Typography>
       <div style={{ display: "flex" }}>
-        <AccessTimeIcon style={{ fontSize: "1.3em", marginRight: "0.2em" }} />
+        {/* <AccessTimeIcon style={{ fontSize: "1.3em", marginRight: "0.2em" }} /> */}
         <Typography color="textSecondary">{dt}</Typography>
       </div>
     </React.Fragment>

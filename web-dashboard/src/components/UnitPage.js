@@ -267,33 +267,52 @@ export default class UnitPage extends Component {
         });
       })
       .catch((e) => {
-        alert("Session timeout, please re login");
-        localStorage.removeItem("token");
-        this.handleRedirect("/");
+        console.log(e);
       });
-    // api.getDataListrikAkhir(this.state.id).then((res) => {
-    //   this.setState({
-    //     data_last: res.data.data,
-    //   });
-    // });
 
-    // api.getDataListrikTotal(this.state.id).then((res) => {
-    //   this.setState({
-    //     data_all: res.data.data,
-    //   });
-    // });
+    api
+      .getDataListrikAkhir(this.state.id)
+      .then((res) => {
+        this.setState({
+          data_last: res.data.data,
+        });
+      })
+      .catch((e) => {
+        console.log(e);
+      });
 
-    // api.getCurrentYearById(this.state.id).then((res) => {
-    //   this.setState({
-    //     datas: res.data.data,
-    //   });
-    // });
+    api
+      .getDataListrikTotal(this.state.id)
+      .then((res) => {
+        this.setState({
+          data_all: res.data.data,
+        });
+      })
+      .catch((e) => {
+        console.log(e);
+      });
 
-    // api.getNotif(this.state.id).then((res) => {
-    //   this.setState({
-    //     notifs: res.data.data,
-    //   });
-    // });
+    api
+      .getCurrentYearById(this.state.id)
+      .then((res) => {
+        this.setState({
+          datas: res.data.data,
+        });
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+
+    api
+      .getNotif(this.state.id)
+      .then((res) => {
+        this.setState({
+          notifs: res.data.data,
+        });
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   };
 
   handleRedirect = (link) => {

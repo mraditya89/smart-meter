@@ -18,7 +18,7 @@ export default function SaldoPanel(param) {
   const classes = useStyles();
   let saldo = 0;
   let date = "";
-  if (param.data != "") {
+  if (param.data != "" && param.data !== undefined) {
     saldo = param.data.daya_sisa;
     date = param.data.date_time;
   }
